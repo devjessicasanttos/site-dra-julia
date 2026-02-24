@@ -1,7 +1,8 @@
 import React from 'react';
+import { cn } from "@/lib/utils"; // Certifique-se de ter essa utilitária ou use strings comuns
 import serviceLimpeza from "@/assets/limpeza.jpeg";
 import serviceClareamento from "@/assets/clareamento.jpeg";
-import serviceProtese from "@/assets/service-ortodontia.jpg";
+import serviceProtese from "@/assets/service-ortodontia.jpg"; // Substitua pela foto real quando tiver
 import serviceBotox from "@/assets/botox.jpeg";
 import servicePreenchimento from "@/assets/labio.jpeg";
 import serviceOrtodontia from "@/assets/service-ortodontia.jpg";
@@ -15,8 +16,7 @@ const services = [
   { 
     title: "Clareamento Dental", 
     description: "Devolva a luminosidade do seu sorriso com técnicas avançadas de clareamento.", 
-    image: serviceClareamento,
-    position: "object-center" // Você pode testar "object-top" ou "object-[center_30%]"
+    image: serviceClareamento 
   },
   { 
     title: "Prótese", 
@@ -42,54 +42,57 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section id="servicos" className="py-20 bg-[#F8FAFC]">
+    <section id="servicos" className="py-24 bg-[#F8FAFC]">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Cabeçalho da Seção */}
         <div className="text-center mb-16">
-          <p className="text-[#8EADC1] text-xs font-bold tracking-[0.3em] uppercase mb-2">
+          <p className="text-[#8EADC1] text-xs font-bold tracking-[0.3em] uppercase mb-3">
             Especialidades
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900">
             Meus Serviços
           </h2>
-          <div className="w-12 h-[2px] bg-[#8EADC1] mx-auto mt-4" />
+          <div className="w-16 h-[3px] bg-[#8EADC1] mx-auto mt-6 rounded-full" />
         </div>
 
-        {/* Grid de Serviços */}
+        {/* Grid de Serviços - 3 colunas no desktop, 1 no mobile */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service) => (
             <div
               key={service.title}
-              className="group relative bg-white rounded-[2rem] border border-slate-100 shadow-sm transition-all duration-500"
+              className="group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col"
             >
-              {/* CAMADA DA FOTO INTEIRA (Aparece no Hover) */}
-              <div className="absolute inset-0 z-50 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-500 scale-95 group-hover:scale-110">
+              {/* CONTAINER DA IMAGEM 
+                  Ajustamos com padding (p-8) e object-contain para a foto não ficar "estourada"
+              */}
+              <div className="h-72 bg-slate-50/50 flex items-center justify-center p-8 overflow-hidden relative">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-contain bg-white/95 rounded-[2rem] shadow-2xl p-2"
+                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110"
                 />
+                
+                {/* Overlay sutil de brilho no hover */}
+                <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-500" />
               </div>
 
-              {/* CONTEÚDO NORMAL DO CARD */}
-              <div className="h-64 overflow-hidden rounded-t-[2rem]">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              <div className="p-6 pb-8"> {/* Aumentei levemente o padding inferior para equilíbrio visual */}
-                <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-[#8EADC1] transition-colors">
+              {/* CONTEÚDO DO TEXTO */}
+              <div className="p-10 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-[#8EADC1] transition-colors">
                   {service.title}
                 </h3>
                 
-                <p className="text-slate-500 text-xs leading-relaxed line-clamp-3">
-                  {/* Aumentei para 3 linhas para preencher o espaço onde ficava o botão */}
+                <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">
                   {service.description}
                 </p>
+
+                {/* Detalhe estético inferior */}
+                <div className="mt-auto pt-6 border-t border-slate-50">
+                  <span className="text-[#8EADC1] text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0 block">
+                    Saiba Mais
+                  </span>
+                </div>
               </div>
             </div>
           ))}
