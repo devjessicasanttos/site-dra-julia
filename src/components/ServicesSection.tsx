@@ -2,10 +2,10 @@ import React from 'react';
 import { cn } from "@/lib/utils"; // Certifique-se de ter essa utilitária ou use strings comuns
 import serviceLimpeza from "@/assets/limpeza.jpeg";
 import serviceClareamento from "@/assets/clareamento.jpeg";
-import serviceProtese from "@/assets/service-ortodontia.jpg"; // Substitua pela foto real quando tiver
+import serviceProtese from "@/assets/protese.png";
 import serviceBotox from "@/assets/botox.jpeg";
 import servicePreenchimento from "@/assets/labio.jpeg";
-import serviceOrtodontia from "@/assets/service-ortodontia.jpg";
+import serviceOrtodontia from "@/assets/ap orto.png";
 
 const services = [
   { 
@@ -86,14 +86,7 @@ export function ServicesSection() {
                 <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">
                   {service.description}
                 </p>
-
-                {/* Detalhe estético inferior */}
-                <div className="mt-auto pt-6 border-t border-slate-50">
-                  <span className="text-[#8EADC1] text-[10px] font-bold uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0 block">
-                    Saiba Mais
-                  </span>
                 </div>
-              </div>
             </div>
           ))}
         </div>
