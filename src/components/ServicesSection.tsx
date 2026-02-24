@@ -41,48 +41,54 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section id="servicos" className="py-24 bg-white">
+    <section id="servicos" className="py-24 bg-[#F8FAFC]">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Cabeçalho */}
-        <div className="mb-20">
+        <div className="text-center mb-20">
           <p className="text-[#8EADC1] text-xs font-bold tracking-[0.3em] uppercase mb-3">
             Especialidades
           </p>
-          <h2 className="text-4xl md:text-5xl font-light text-slate-900">
-            Nossos <span className="font-bold">Serviços</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900">
+            Meus Serviços
           </h2>
-          <div className="w-12 h-[3px] bg-[#8EADC1] mt-6" />
+          <div className="w-16 h-[3px] bg-[#8EADC1] mx-auto mt-6 rounded-full" />
         </div>
 
         {/* Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service) => (
-            <div key={service.title} className="group cursor-pointer flex flex-col">
-              
-              {/* CONTAINER DA IMAGEM - O segredo do "Foco" está aqui */}
-              <div className="relative aspect-square overflow-hidden rounded-[3rem] mb-8 bg-slate-50 shadow-sm border border-slate-100 transition-all duration-500 group-hover:shadow-xl">
-                
-                {/* Imagem em estado normal (Cover) e Hover (Contain + Zoom sutil) */}
+            <div
+              key={service.title}
+              className="group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col"
+            >
+              {/* CONTAINER DA IMAGEM - FOCO OTIMIZADO 
+                  O overflow-hidden no pai garante que a foto cresça sem sair do card
+              */}
+              <div className="h-72 overflow-hidden relative">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover transition-all duration-500 ease-in-out group-hover:object-contain group-hover:scale-95 p-0 group-hover:p-4"
+                  className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-125"
                 />
-
-                {/* Overlay de brilho que some no hover para dar foco total na imagem */}
-                <div className="absolute inset-0 bg-slate-900/5 group-hover:bg-transparent transition-colors duration-500" />
+                
+                {/* Overlay sutil que clareia ao passar o mouse para dar mais nitidez */}
+                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-all duration-500" />
               </div>
 
-              {/* Textos */}
-              <div className="px-2">
-                <h3 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-[#8EADC1] transition-colors flex items-center gap-3">
+              {/* CONTEÚDO DO TEXTO */}
+              <div className="p-10 flex-1 flex flex-col">
+                <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-[#8EADC1] transition-colors">
                   {service.title}
-                  <span className="h-[1px] w-0 bg-[#8EADC1] transition-all duration-500 group-hover:w-12"></span>
                 </h3>
-                <p className="text-slate-500 text-sm leading-relaxed font-light line-clamp-2">
+                
+                <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">
                   {service.description}
                 </p>
+
+                <div className="mt-auto pt-6 border-t border-slate-50">
+                   <div className="w-0 h-[2px] bg-[#8EADC1] group-hover:w-full transition-all duration-700" />
+                </div>
               </div>
             </div>
           ))}
