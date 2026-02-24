@@ -20,12 +20,12 @@ const services = [
   { 
     title: "Prótese", 
     description: "Suavize linhas de expressão e conquiste uma aparência rejuvenescida.", 
-    image: serviceBotox 
+    image: serviceProtese  
   },
   { 
     title: "Botox", 
     description: "Suavize linhas de expressão e conquiste uma aparência rejuvenescida.", 
-    image: serviceBotox 
+    image: serviceBotox
   },
   { 
     title: "Preenchimento Labial", 
