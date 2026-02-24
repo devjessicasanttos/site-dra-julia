@@ -15,7 +15,8 @@ const services = [
   { 
     title: "Clareamento Dental", 
     description: "Devolva a luminosidade do seu sorriso com técnicas avançadas de clareamento.", 
-    image: serviceClareamento 
+    image: serviceClareamento,
+    position: "object-center" // Você pode testar "object-top" ou "object-[center_30%]"
   },
   { 
     title: "Prótese", 
