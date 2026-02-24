@@ -19,7 +19,7 @@ const services = [
   },
   { 
     title: "Prótese", 
-    description: "Suavize linhas de expressão e conquiste uma aparência rejuvenescida.", 
+    description: "Reabilitação oral com próteses fixas ou removíveis, devolvendo função e estética.", 
     image: serviceProtese  
   },
   { 
