@@ -44,7 +44,6 @@ export function ServicesSection() {
     <section id="servicos" className="py-24 bg-[#F8FAFC]">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Cabeçalho */}
         <div className="text-center mb-20">
           <p className="text-[#8EADC1] text-xs font-bold tracking-[0.3em] uppercase mb-3">
             Especialidades
@@ -55,40 +54,32 @@ export function ServicesSection() {
           <div className="w-16 h-[3px] bg-[#8EADC1] mx-auto mt-6 rounded-full" />
         </div>
 
-        {/* Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service) => (
             <div
               key={service.title}
-              className="group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col"
+              className="group relative bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col"
             >
-              {/* CONTAINER DA IMAGEM - FOCO OTIMIZADO 
-                  O overflow-hidden no pai garante que a foto cresça sem sair do card
+              {/* CONTAINER DA IMAGEM 
+                  Removido overflow-hidden para permitir que a imagem saia do card
               */}
-              <div className="h-72 overflow-hidden relative">
+              <div className="relative h-64 w-full">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-125"
+                  className="absolute inset-0 w-full h-full object-cover rounded-t-[2.5rem] transition-all duration-500 ease-in-out z-10 
+                             group-hover:scale-110 group-hover:object-contain group-hover:z-50 group-hover:rounded-2xl group-hover:shadow-2xl group-hover:bg-white"
                 />
-                
-                {/* Overlay sutil que clareia ao passar o mouse para dar mais nitidez */}
-                <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-all duration-500" />
               </div>
 
               {/* CONTEÚDO DO TEXTO */}
-              <div className="p-10 flex-1 flex flex-col">
-                <h3 className="text-xl font-bold text-slate-900 mb-4 group-hover:text-[#8EADC1] transition-colors">
+              <div className="p-8 flex-1 flex flex-col bg-white rounded-b-[2.5rem] z-20">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#8EADC1] transition-colors">
                   {service.title}
                 </h3>
-                
-                <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3">
+                <p className="text-slate-500 text-sm leading-relaxed line-clamp-3">
                   {service.description}
                 </p>
-
-                <div className="mt-auto pt-6 border-t border-slate-50">
-                   <div className="w-0 h-[2px] bg-[#8EADC1] group-hover:w-full transition-all duration-700" />
-                </div>
               </div>
             </div>
           ))}
