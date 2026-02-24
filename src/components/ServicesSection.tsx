@@ -1,6 +1,7 @@
 import React from 'react';
 import serviceLimpeza from "@/assets/limpeza.jpeg";
-import serviceClareamento from "@/assets/service-clareamento.jpg";
+import serviceClareamento from "@/assets/clareamento.jpeg";
+import serviceProtese from "@/assets/service-ortodontia.jpg";
 import serviceBotox from "@/assets/botox.jpeg";
 import servicePreenchimento from "@/assets/labio.jpeg";
 import serviceOrtodontia from "@/assets/service-ortodontia.jpg";
@@ -15,6 +16,11 @@ const services = [
     title: "Clareamento Dental", 
     description: "Devolva a luminosidade do seu sorriso com técnicas avançadas de clareamento.", 
     image: serviceClareamento 
+  },
+  { 
+    title: "Prótese", 
+    description: "Suavize linhas de expressão e conquiste uma aparência rejuvenescida.", 
+    image: serviceBotox 
   },
   { 
     title: "Botox", 
