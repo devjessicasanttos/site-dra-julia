@@ -2,7 +2,8 @@ import React from 'react';
 import serviceLimpeza from "@/assets/limpeza.jpeg";
 import serviceClareamento from "@/assets/clareamento.jpeg";
 import serviceProtese from "@/assets/protese.png";
-import serviceBotox from "@/assets/botox2.jpeg";
+import serviceBotox from "@/assets/botox.jpeg";
+import serviceBotox2 from "@/assets/botox2.jpeg";
 import servicePreenchimento from "@/assets/labio.jpeg";
 import serviceOrtodontia from "@/assets/ap orto.png";
 
@@ -25,7 +26,7 @@ const services = [
   { 
     title: "Botox", 
     description: "Suavize linhas de expressão e conquiste uma aparência rejuvenescida.", 
-    image: serviceBotox
+    images: serviceBotox, serviceBotox2
   },
   { 
     title: "Preenchimento Labial", 
