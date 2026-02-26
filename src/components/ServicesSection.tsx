@@ -11,7 +11,7 @@ const services = [
   { 
     title: "Limpeza Dental", 
     description: "Remoção profissional de tártaro e placa bacteriana para manter a saúde bucal.", 
-    images: [serviceLimpeza] // Transformei tudo em array para padronizar
+    images: [serviceLimpeza] 
   },
   { 
     title: "Clareamento Dental", 
@@ -26,7 +26,7 @@ const services = [
   { 
     title: "Botox", 
     description: "Suavize linhas de expressão e conquiste uma aparência rejuvenescida.", 
-    images: [serviceBotox, serviceBotox2] // CORRETO: Agora é um array com as duas fotos
+    images: [serviceBotox, serviceBotox2] 
   },
   { 
     title: "Preenchimento Labial", 
@@ -62,22 +62,29 @@ export function ServicesSection() {
               className="group relative bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col"
             >          
               <div className="relative h-64 w-full">
-                {/* LÓGICA PARA EXIBIR: 
-                   Aqui pegamos a primeira imagem images[0]. 
-                   Se quiser um carrossel, a lógica mudaria, mas para o efeito de "foco", 
-                   exibimos a principal.
-                */}
+                
+                {/* PRIMEIRA IMAGEM (CAPA) */}
                 <img
                   src={service.images[0]} 
                   alt={service.title}
-                  className="absolute inset-0 w-full h-full object-cover rounded-t-[2.5rem] transition-all duration-500 ease-in-out z-10 
-                             group-hover:scale-110 group-hover:object-contain group-hover:z-50 group-hover:rounded-2xl group-hover:shadow-2xl group-hover:bg-white"
+                  className={`absolute inset-0 w-full h-full object-cover rounded-t-[2.5rem] transition-all duration-500 ease-in-out z-10 
+                             ${service.images.length > 1 ? 'group-hover:opacity-0' : 'group-hover:scale-110 group-hover:object-contain group-hover:z-50 group-hover:rounded-2xl group-hover:shadow-2xl group-hover:bg-white'}`}
                 />
 
-                {/* Badge opcional indicando que há mais fotos (estilo moderno) */}
+                {/* SEGUNDA IMAGEM (APARECE NO HOVER) */}
                 {service.images.length > 1 && (
-                  <div className="absolute top-4 right-4 z-20 bg-white/80 backdrop-blur-sm text-[#8EADC1] text-[10px] font-bold px-3 py-1 rounded-full shadow-sm">
-                    +{service.images.length - 1} FOTO
+                  <img
+                    src={service.images[1]} 
+                    alt={`${service.title} Detalhe`}
+                    className="absolute inset-0 w-full h-full object-cover rounded-t-[2.5rem] transition-all duration-500 ease-in-out opacity-0 z-0
+                               group-hover:opacity-100 group-hover:scale-110 group-hover:object-contain group-hover:z-50 group-hover:rounded-2xl group-hover:shadow-2xl group-hover:bg-white"
+                  />
+                )}
+
+                {/* Badge (Some no hover para não atrapalhar a visão) */}
+                {service.images.length > 1 && (
+                  <div className="absolute top-4 right-4 z-20 bg-white/80 backdrop-blur-sm text-[#8EADC1] text-[10px] font-bold px-3 py-1 rounded-full shadow-sm group-hover:opacity-0 transition-opacity">
+                    VEJA RESULTADO
                   </div>
                 )}
               </div>
