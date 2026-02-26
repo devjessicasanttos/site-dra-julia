@@ -2,7 +2,7 @@ import React from 'react';
 import serviceLimpeza from "@/assets/limpeza.jpeg";
 import serviceClareamento from "@/assets/clareamento.jpeg";
 import serviceProtese from "@/assets/protese.png";
-import serviceBotox from "@/assets/botox.jpeg";
+import serviceBotox from "@/assets/botox2.jpeg";
 import servicePreenchimento from "@/assets/labio.jpeg";
 import serviceOrtodontia from "@/assets/ap orto.png";
 
