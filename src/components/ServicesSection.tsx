@@ -11,32 +11,32 @@ const services = [
   { 
     title: "Limpeza Dental", 
     description: "Remoção profissional de tártaro e placa bacteriana para manter a saúde bucal.", 
-    image: serviceLimpeza 
+    images: [serviceLimpeza] // Transformei tudo em array para padronizar
   },
   { 
     title: "Clareamento Dental", 
     description: "Devolva a luminosidade do seu sorriso com técnicas avançadas de clareamento.", 
-    image: serviceClareamento 
+    images: [serviceClareamento] 
   },
   { 
     title: "Prótese", 
     description: "Reabilitação oral com próteses fixas ou removíveis, devolvendo função e estética.", 
-    image: serviceProtese  
+    images: [serviceProtese]  
   },
   { 
     title: "Botox", 
     description: "Suavize linhas de expressão e conquiste uma aparência rejuvenescida.", 
-    images: serviceBotox, serviceBotox2
+    images: [serviceBotox, serviceBotox2] // CORRETO: Agora é um array com as duas fotos
   },
   { 
     title: "Preenchimento Labial", 
     description: "Lábios mais definidos e volumosos com preenchimento de ácido hialurônico.", 
-    image: servicePreenchimento 
+    images: [servicePreenchimento] 
   },
   { 
     title: "Aparelho Ortodôntico", 
     description: "Correção do alinhamento dental com opções modernas e discretas.", 
-    image: serviceOrtodontia 
+    images: [serviceOrtodontia] 
   },
 ];
 
@@ -62,15 +62,26 @@ export function ServicesSection() {
               className="group relative bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col"
             >          
               <div className="relative h-64 w-full">
+                {/* LÓGICA PARA EXIBIR: 
+                   Aqui pegamos a primeira imagem images[0]. 
+                   Se quiser um carrossel, a lógica mudaria, mas para o efeito de "foco", 
+                   exibimos a principal.
+                */}
                 <img
-                  src={service.image}
+                  src={service.images[0]} 
                   alt={service.title}
                   className="absolute inset-0 w-full h-full object-cover rounded-t-[2.5rem] transition-all duration-500 ease-in-out z-10 
                              group-hover:scale-110 group-hover:object-contain group-hover:z-50 group-hover:rounded-2xl group-hover:shadow-2xl group-hover:bg-white"
                 />
+
+                {/* Badge opcional indicando que há mais fotos (estilo moderno) */}
+                {service.images.length > 1 && (
+                  <div className="absolute top-4 right-4 z-20 bg-white/80 backdrop-blur-sm text-[#8EADC1] text-[10px] font-bold px-3 py-1 rounded-full shadow-sm">
+                    +{service.images.length - 1} FOTO
+                  </div>
+                )}
               </div>
 
-              {/* CONTEÚDO DO TEXTO */}
               <div className="p-8 flex-1 flex flex-col bg-white rounded-b-[2.5rem] z-20">
                 <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#8EADC1] transition-colors">
                   {service.title}
