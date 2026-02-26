@@ -59,10 +59,7 @@ export function ServicesSection() {
             <div
               key={service.title}
               className="group relative bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col"
-            >
-              {/* CONTAINER DA IMAGEM 
-                  Removido overflow-hidden para permitir que a imagem saia do card
-              */}
+            >          
               <div className="relative h-64 w-full">
                 <img
                   src={service.image}
