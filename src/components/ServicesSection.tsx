@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+// IMPOSTS DE ASSETS - Certifique-se de que os nomes dos arquivos na pasta coincidem exatamente
 import serviceLimpeza from "@/assets/limpeza.jpeg";
 import serviceClareamento from "@/assets/clareamento.jpeg";
 import serviceProtese from "@/assets/protese.png";
@@ -42,7 +44,7 @@ const servicesData = [
 ];
 
 export function ServicesSection() {
-  // Estado para controlar qual imagem de cada card está ativa
+  // Estado para controlar a troca de fotos individual por card
   const [activeIndices, setActiveIndices] = useState<Record<string, number>>({});
 
   const toggleImage = (title: string, max: number) => {
@@ -57,12 +59,18 @@ export function ServicesSection() {
     <section id="servicos" className="py-24 bg-[#F8FAFC]">
       <div className="max-w-7xl mx-auto px-6">
         
+        {/* Cabeçalho da Seção */}
         <div className="text-center mb-20">
-          <p className="text-[#8EADC1] text-xs font-bold tracking-[0.3em] uppercase mb-3">Especialidades</p>
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900">Meus Serviços</h2>
+          <p className="text-[#8EADC1] text-xs font-bold tracking-[0.3em] uppercase mb-3">
+            Especialidades
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900">
+            Meus Serviços
+          </h2>
           <div className="w-16 h-[3px] bg-[#8EADC1] mx-auto mt-6 rounded-full" />
         </div>
 
+        {/* Grid de Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {servicesData.map((service) => {
             const currentIndex = activeIndices[service.title] || 0;
@@ -73,19 +81,19 @@ export function ServicesSection() {
                 onClick={() => toggleImage(service.title, service.images.length)}
                 className="group relative bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col cursor-pointer active:scale-[0.98] md:active:scale-100"
               >          
+                {/* Container da Imagem */}
                 <div className="relative h-64 w-full">
-                  {/* IMAGEM ATIVA COM TRANSIÇÃO */}
                   <img
-                    key={currentIndex} // 'key' força o React a re-renderizar a animação na troca
+                    key={currentIndex}
                     src={service.images[currentIndex]} 
                     alt={service.title}
-                    className="absolute inset-0 w-full h-full object-cover rounded-t-[2.5rem] transition-all duration-500 ease-in-out z-10 
-                               md:group-hover:scale-110 md:group-hover:object-contain md:group-hover:z-50 md:group-hover:rounded-2xl md:group-hover:shadow-2xl md:group-hover:bg-white animate-in fade-in zoom-in duration-500"
+                    className="absolute inset-0 w-full h-full object-cover rounded-t-[2.5rem] transition-all duration-700 ease-in-out z-10 
+                               md:group-hover:scale-125 md:group-hover:object-contain md:group-hover:z-50 md:group-hover:rounded-2xl md:group-hover:shadow-2xl md:group-hover:bg-white animate-in fade-in zoom-in duration-500"
                   />
 
-                  {/* INDICADOR DE FOTOS (Mobile Friendly) */}
+                  {/* Indicadores de Galeria (Pontinhos/Barras) */}
                   {service.images.length > 1 && (
-                    <div className="absolute top-4 right-4 z-20 flex gap-1">
+                    <div className="absolute top-4 right-4 z-20 flex gap-1 md:group-hover:opacity-0 transition-opacity">
                       {service.images.map((_, i) => (
                         <div 
                           key={i} 
@@ -95,13 +103,15 @@ export function ServicesSection() {
                     </div>
                   )}
 
+                  {/* Dica visual para Mobile */}
                   {service.images.length > 1 && (
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[20] bg-black/20 backdrop-blur-md text-white text-[9px] font-bold px-3 py-1 rounded-full md:hidden">
-                      TOQUE PARA ALTERNAR
+                      TOQUE PARA VER PRÓXIMA
                     </div>
                   )}
                 </div>
 
+                {/* Conteúdo de Texto */}
                 <div className="p-8 flex-1 flex flex-col bg-white rounded-b-[2.5rem] z-20">
                   <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#8EADC1] transition-colors">
                     {service.title}
