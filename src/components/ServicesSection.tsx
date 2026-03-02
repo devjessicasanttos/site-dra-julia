@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-// IMPOSTS DE ASSETS - Certifique-se de que os nomes dos arquivos na pasta coincidem exatamente
+// imports de assets
 import serviceLimpeza from "@/assets/limpeza.jpeg";
 import serviceClareamento from "@/assets/clareamento.jpeg";
 import serviceProtese from "@/assets/protese.png";
@@ -44,75 +44,73 @@ const servicesData = [
 ];
 
 export function ServicesSection() {
-  // Estado para controlar a troca de fotos individual por card
   const [activeIndices, setActiveIndices] = useState<Record<string, number>>({});
+  const [focusedCard, setFocusedCard] = useState<string | null>(null);
 
-  const toggleImage = (title: string, max: number) => {
-    if (max <= 1) return;
-    setActiveIndices(prev => ({
-      ...prev,
-      [title]: ((prev[title] || 0) + 1) % max
-    }));
+  const handleInteraction = (title: string, max: number) => {
+    // Se clicar no mesmo card, troca a foto
+    if (focusedCard === title) {
+      if (max > 1) {
+        setActiveIndices(prev => ({
+          ...prev,
+          [title]: ((prev[title] || 0) + 1) % max
+        }));
+      } else {
+        setFocusedCard(null); // Se só tem uma foto, fecha o foco no segundo clique
+      }
+    } else {
+      setFocusedCard(title); // Primeiro clique: foca e expande a foto
+    }
   };
 
   return (
     <section id="servicos" className="py-24 bg-[#F8FAFC]">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Cabeçalho da Seção */}
         <div className="text-center mb-20">
-          <p className="text-[#8EADC1] text-xs font-bold tracking-[0.3em] uppercase mb-3">
-            Especialidades
-          </p>
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900">
-            Meus Serviços
-          </h2>
+          <p className="text-[#8EADC1] text-xs font-bold tracking-[0.3em] uppercase mb-3">Especialidades</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900">Meus Serviços</h2>
           <div className="w-16 h-[3px] bg-[#8EADC1] mx-auto mt-6 rounded-full" />
         </div>
 
-        {/* Grid de Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {servicesData.map((service) => {
             const currentIndex = activeIndices[service.title] || 0;
+            const isFocused = focusedCard === service.title;
             
             return (
               <div
                 key={service.title}
-                onClick={() => toggleImage(service.title, service.images.length)}
-                className="group relative bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col cursor-pointer active:scale-[0.98] md:active:scale-100"
+                onClick={() => handleInteraction(service.title, service.images.length)}
+                className={`group relative bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col cursor-pointer 
+                           ${isFocused ? 'z-50 shadow-2xl scale-[1.02]' : 'z-10'}`}
               >          
-                {/* Container da Imagem */}
                 <div className="relative h-64 w-full">
                   <img
                     key={currentIndex}
                     src={service.images[currentIndex]} 
                     alt={service.title}
-                    className="absolute inset-0 w-full h-full object-cover rounded-t-[2.5rem] transition-all duration-700 ease-in-out z-10 
-                               md:group-hover:scale-125 md:group-hover:object-contain md:group-hover:z-50 md:group-hover:rounded-2xl md:group-hover:shadow-2xl md:group-hover:bg-white animate-in fade-in zoom-in duration-500"
+                    /* A mágica acontece aqui: 
+                       Se estiver focado (clicado no mobile) OU com mouse em cima (desktop), 
+                       aplicamos as classes de expansão.
+                    */
+                    className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out
+                               ${isFocused || 'group-hover:scale-125'} 
+                               ${isFocused ? 'scale-125 object-contain z-50 rounded-2xl shadow-2xl bg-white' : 'object-cover rounded-t-[2.5rem]'}
+                               md:group-hover:object-contain md:group-hover:z-50 md:group-hover:rounded-2xl md:group-hover:shadow-2xl md:group-hover:bg-white`}
                   />
 
-                  {/* Indicadores de Galeria (Pontinhos/Barras) */}
+                  {/* Indicadores de Galeria */}
                   {service.images.length > 1 && (
-                    <div className="absolute top-4 right-4 z-20 flex gap-1 md:group-hover:opacity-0 transition-opacity">
+                    <div className={`absolute top-4 right-4 z-20 flex gap-1 transition-opacity ${isFocused ? 'opacity-0' : 'opacity-100'}`}>
                       {service.images.map((_, i) => (
-                        <div 
-                          key={i} 
-                          className={`h-1.5 w-4 rounded-full transition-all ${i === currentIndex ? 'bg-[#8EADC1]' : 'bg-white/50'}`} 
-                        />
+                        <div key={i} className={`h-1.5 w-4 rounded-full ${i === currentIndex ? 'bg-[#8EADC1]' : 'bg-white/50'}`} />
                       ))}
-                    </div>
-                  )}
-
-                  {/* Dica visual para Mobile */}
-                  {service.images.length > 1 && (
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-[20] bg-black/20 backdrop-blur-md text-white text-[9px] font-bold px-3 py-1 rounded-full md:hidden">
-                      TOQUE PARA VER PRÓXIMA
                     </div>
                   )}
                 </div>
 
-                {/* Conteúdo de Texto */}
-                <div className="p-8 flex-1 flex flex-col bg-white rounded-b-[2.5rem] z-20">
+                <div className="p-8 flex-1 flex flex-col bg-white rounded-b-[2.5rem]">
                   <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#8EADC1] transition-colors">
                     {service.title}
                   </h3>
@@ -125,6 +123,14 @@ export function ServicesSection() {
           })}
         </div>
       </div>
+      
+      {/* Overlay para fechar o foco ao clicar fora (opcional) */}
+      {focusedCard && (
+        <div 
+          className="fixed inset-0 z-40 bg-black/5" 
+          onClick={() => setFocusedCard(null)} 
+        />
+      )}
     </section>
   );
 }
