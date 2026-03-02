@@ -5,6 +5,7 @@ import serviceProtese from "@/assets/protese.png";
 import serviceBotox from "@/assets/botox.jpeg";
 import serviceBotox2 from "@/assets/botox2.jpeg";
 import servicePreenchimento from "@/assets/labio.jpeg";
+import servicePreenchimento1 from "@/assets/labio2.jpeg";
 import serviceOrtodontia from "@/assets/ap orto.png";
 
 const servicesData = [
@@ -31,7 +32,7 @@ const servicesData = [
   { 
     title: "Preenchimento Labial", 
     description: "Lábios mais definidos e volumosos com preenchimento de ácido hialurônico.", 
-    images: [servicePreenchimento] 
+    images: [servicePreenchimento, servicePreenchimento1] 
   },
   { 
     title: "Aparelho Ortodôntico", 
